@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:reference interface="com.wu.tx.core.api.IMessageFacade"
+		version="${service.version:1.0}" id="txMessageFacade" p/>
+	
+	<bean id="txMessageAround" class="com.wu.wuji.common.cache.RedisCacheAround" />
+	
+	<bean id="txMessage" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces" value="com.wu.tx.core.api.IMessageFacade" />
+		<property name="target" ref="txMessageFacade" />
+		<property name="interceptorNames">
+			<list>
+				<value>redisCacheAround</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>
