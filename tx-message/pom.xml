@@ -7,7 +7,9 @@
 	<packaging>pom</packaging>
 	
 	<modules>
+		<module>tx-message-api</module>
 		<module>tx-message-core</module>
+		<module>tx-message-service</module>
 	</modules>
 	
 	<build>
