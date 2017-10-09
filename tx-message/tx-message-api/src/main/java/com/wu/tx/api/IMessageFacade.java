@@ -1,4 +1,4 @@
-package com.wu.tx.core.api;
+package com.wu.tx.api;
 
 /**
  * 消息服务
